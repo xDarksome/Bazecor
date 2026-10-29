@@ -1,0 +1,47 @@
+name: AppImage
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: appimage-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  appimage:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0
+      - run: npm install -g yarn
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y libudev-dev libusb-1.0-0-dev
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package.json', 'yarn.lock') }}
+      - name: Install node_modules
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile --network-timeout 300000
+      - name: Build AppImage
+        run: yarn run electron-forge make --platform=linux --targets=@reforged/maker-appimage
+      - name: Show build items
+        run: ls -R out/make
+      - name: Upload AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bazecor-${{ github.sha }}-AppImage
+          path: out/make/**/*.AppImage
+          if-no-files-found: error
