@@ -39,6 +39,7 @@ import { Picker } from ".";
 import ModPicker from "./ModPicker";
 import ModifiersTab from "../KeysTabs/ModifiersTab";
 import Store from "@Renderer/utils/Store";
+import { MAX_LAYERS } from "../../../api/keymap/db/layerswitch";
 
 // Icons
 
@@ -328,7 +329,7 @@ function KeyPickerKeyboard(props: Props) {
     let tab = "";
     if (keyCode < 256 || keyCode === 65535) tab = "tabKeys";
     if (keyCode >= 256 && keyCode <= 8192) tab = "tabKeys";
-    if (keyCode >= 17408 && keyCode <= 17501) tab = "tabLayers";
+    if (keyCode >= 17408 && keyCode <= 17492 + MAX_LAYERS - 1) tab = "tabLayers";
     if (keyCode >= 49161 && keyCode <= 49168) tab = "tabLayers";
     if (keyCode >= 51218 && keyCode <= 53266) tab = "tabLayers";
     if (keyCode >= 49153 && keyCode <= 49160) tab = "tabLayers";

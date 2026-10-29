@@ -17,6 +17,7 @@ import { MacrosType } from "@Renderer/types/macros";
 import { KeymapDB } from "../../../api/keymap";
 import { Picker } from "../KeyPickerKeyboard";
 import Store from "@Renderer/utils/Store";
+import { MAX_LAYERS } from "../../../api/keymap/db/layerswitch";
 
 interface LayersTabProps {
   keyCode?: SegmentedKeyType;
@@ -51,21 +52,7 @@ const LayersTab = ({
   const store = Store.getStore();
   const sk20 = Boolean(store.get("capabilities.sk20"));
 
-  const layers = useMemo(
-    () => [
-      { layer: 1 },
-      { layer: 2 },
-      { layer: 3 },
-      { layer: 4 },
-      { layer: 5 },
-      { layer: 6 },
-      { layer: 7 },
-      { layer: 8 },
-      { layer: 9 },
-      { layer: 10 },
-    ],
-    [],
-  );
+  const layers = useMemo(() => Array.from({ length: MAX_LAYERS }, (_, i) => ({ layer: i + 1 })), []);
 
   const triggerToast = () => {
     toast.warn(

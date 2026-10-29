@@ -43,6 +43,7 @@ import OSKey from "@Renderer/components/molecules/KeyTags/OSKey";
 
 import { getKeyboardLayout } from "@Renderer/utils/getKeyboardLayout";
 import { SegmentedKeyType } from "@Renderer/types/layout";
+import { MAX_LAYERS } from "../../../api/keymap/db/layerswitch";
 
 const Style = Styled.div`
 width: 100%;
@@ -387,7 +388,7 @@ const KeyPicker = (props: Props) => {
     const KeyIsKey =
       code.base === key.id &&
       (code.base + code.modified < 53267 || code.base + code.modified > 60000) &&
-      (code.base + code.modified < 17450 || code.base + code.modified > 17501) &&
+      (code.base + code.modified < 17450 || code.base + code.modified > 17492 + MAX_LAYERS - 1) &&
       (code.base + code.modified < 49153 || code.base + code.modified > 49168)
         ? true
         : !!(code.modified > 0 && code.base + code.modified === key.id);

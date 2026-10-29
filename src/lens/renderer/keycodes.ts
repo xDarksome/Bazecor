@@ -215,12 +215,12 @@ export { layoutOverrides, shiftOverrides, altGrOverrides, symbolOverrides } from
 export type { SymbolOverrides } from "./layouts";
 
 // Layer key codes — verified against Bazecor src/api/keymap/db/layerswitch.tsx
-const LAYER_LOCK_MIN = 17408; // LockLayerTable  layer 1-10
-const LAYER_LOCK_MAX = 17417;
-const LAYER_SHIFT_MIN = 17450; // ShiftToLayerTable layer 1-10
-const LAYER_SHIFT_MAX = 17459;
-const LAYER_MOVE_MIN = 17492; // MoveToLayerTable  layer 1-10
-const LAYER_MOVE_MAX = 17501;
+const LAYER_LOCK_MIN = 17408; // LockLayerTable  layer 1-16
+const LAYER_LOCK_MAX = 17423;
+const LAYER_SHIFT_MIN = 17450; // ShiftToLayerTable layer 1-16
+const LAYER_SHIFT_MAX = 17465;
+const LAYER_MOVE_MIN = 17492; // MoveToLayerTable  layer 1-16
+const LAYER_MOVE_MAX = 17507;
 
 // One-shot layer — db/oneshot.tsx layer 1-8
 const LAYER_ONESHOT_MIN = 49161;

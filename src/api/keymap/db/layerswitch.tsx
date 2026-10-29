@@ -18,232 +18,31 @@ import React from "react";
 import LayerTag from "@Renderer/components/molecules/KeyTags/LayerTag";
 import { BaseKeycodeTableType } from "../types";
 
+// Number of layers the layer keys cover. The xDarksome Sonsei firmware has 16 layers.
+export const MAX_LAYERS = 16;
+
+const layerKeys = (firstCode: number, type: "lock" | "shift") =>
+  Array.from({ length: MAX_LAYERS }, (_, i) => ({
+    code: firstCode + i,
+    labels: {
+      top: <LayerTag type={type} layerNumber={i + 1} />,
+      primary: "",
+    },
+  }));
+
 const LockLayerTable: BaseKeycodeTableType = {
   groupName: "Lock layer to",
-  keys: [
-    {
-      code: 17408,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={1} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17409,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={2} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17410,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={3} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17411,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={4} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17412,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={5} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17413,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={6} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17414,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={7} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17415,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={8} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17416,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={9} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17417,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={10} />,
-        primary: "",
-      },
-    },
-  ],
+  keys: layerKeys(17408, "lock"),
 };
 
 const ShiftToLayerTable: BaseKeycodeTableType = {
   groupName: "Shift to layer",
-  keys: [
-    {
-      code: 17450,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={1} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17451,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={2} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17452,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={3} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17453,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={4} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17454,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={5} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17455,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={6} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17456,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={7} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17457,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={8} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17458,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={9} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17459,
-      labels: {
-        top: <LayerTag type="shift" layerNumber={10} />,
-        primary: "",
-      },
-    },
-  ],
+  keys: layerKeys(17450, "shift"),
 };
 
 const MoveToLayerTable: BaseKeycodeTableType = {
   groupName: "Move to layer",
-  keys: [
-    {
-      code: 17492,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={1} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17493,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={2} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17494,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={3} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17495,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={4} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17496,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={5} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17497,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={6} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17498,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={7} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17499,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={8} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17500,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={9} />,
-        primary: "",
-      },
-    },
-    {
-      code: 17501,
-      labels: {
-        top: <LayerTag type="lock" layerNumber={10} />,
-        primary: "",
-      },
-    },
-  ],
+  keys: layerKeys(17492, "lock"),
 };
 
 export { LockLayerTable, ShiftToLayerTable, MoveToLayerTable };

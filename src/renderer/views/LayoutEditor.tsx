@@ -68,6 +68,7 @@ import {
   parseSuperkeysRaw,
   serializeKeymap,
 } from "../../api/parsers";
+import { MAX_LAYERS } from "../../api/keymap/db/layerswitch";
 
 const store = Store.getStore();
 
@@ -413,51 +414,7 @@ const Styles = Styled.div`
 type ModeType = "keyboard" | "color";
 
 const LayoutEditor = (props: LayoutEditorProps) => {
-  const defaultLayerNames = useMemo(
-    () => [
-      {
-        id: 0,
-        name: "L1",
-      },
-      {
-        id: 1,
-        name: "L2",
-      },
-      {
-        id: 2,
-        name: "L3",
-      },
-      {
-        id: 3,
-        name: "L4",
-      },
-      {
-        id: 4,
-        name: "L5",
-      },
-      {
-        id: 5,
-        name: "L6",
-      },
-      {
-        id: 6,
-        name: "L7",
-      },
-      {
-        id: 7,
-        name: "L8",
-      },
-      {
-        id: 8,
-        name: "L9",
-      },
-      {
-        id: 9,
-        name: "L10",
-      },
-    ],
-    [],
-  );
+  const defaultLayerNames = useMemo(() => Array.from({ length: MAX_LAYERS }, (_, i) => ({ id: i, name: `L${i + 1}` })), []);
 
   const bkp = new Backup();
 
@@ -1386,7 +1343,7 @@ const LayoutEditor = (props: LayoutEditorProps) => {
     );
     const options = {
       title: "Save Layer file",
-      defaultPath: `${layerNames[currentLayer].name}.json`,
+      defaultPath: `${layerNames[currentLayer]?.name ?? `L${currentLayer + 1}`}.json`,
       buttonLabel: "Save Layer",
       filters: [
         { name: "Json", extensions: ["json"] },
@@ -1469,8 +1426,7 @@ const LayoutEditor = (props: LayoutEditorProps) => {
     onApply();
   };
 
-  const layerName = (index: number): string =>
-    layerNames !== undefined && layerNames.length > index ? layerNames[index]?.name : defaultLayerNames[index]?.name;
+  const layerName = (index: number): string => layerNames?.[index]?.name ?? defaultLayerNames[index]?.name ?? `L${index + 1}`;
 
   const modeSelectToggle = (data: ModeType) => {
     setSelectedPaletteColor(null);

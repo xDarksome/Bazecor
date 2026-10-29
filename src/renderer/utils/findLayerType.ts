@@ -1,3 +1,5 @@
+import { MAX_LAYERS } from "../../api/keymap/db/layerswitch";
+
 type LayerElement = {
   layer: number;
   type: string;
@@ -7,26 +9,18 @@ type LayerElement = {
 
 const findLayerType = (keynum?: number, type?: string, layer?: number): LayerElement | undefined => {
   const layers = [
-    { layer: 1, type: "layerLock", name: "Layer Lock 1", keynum: 17492 },
-    { layer: 2, type: "layerLock", name: "Layer Lock 2", keynum: 17493 },
-    { layer: 3, type: "layerLock", name: "Layer Lock 3", keynum: 17494 },
-    { layer: 4, type: "layerLock", name: "Layer Lock 4", keynum: 17495 },
-    { layer: 5, type: "layerLock", name: "Layer Lock 5", keynum: 17496 },
-    { layer: 6, type: "layerLock", name: "Layer Lock 6", keynum: 17497 },
-    { layer: 7, type: "layerLock", name: "Layer Lock 7", keynum: 17498 },
-    { layer: 8, type: "layerLock", name: "Layer Lock 8", keynum: 17499 },
-    { layer: 9, type: "layerLock", name: "Layer Lock 9", keynum: 17500 },
-    { layer: 10, type: "layerLock", name: "Layer Lock 10", keynum: 17501 },
-    { layer: 1, type: "layerShift", name: "Layer Shift 1", keynum: 17450 },
-    { layer: 2, type: "layerShift", name: "Layer Shift 2", keynum: 17451 },
-    { layer: 3, type: "layerShift", name: "Layer Shift 3", keynum: 17452 },
-    { layer: 4, type: "layerShift", name: "Layer Shift 4", keynum: 17453 },
-    { layer: 5, type: "layerShift", name: "Layer Shift 5", keynum: 17454 },
-    { layer: 6, type: "layerShift", name: "Layer Shift 6", keynum: 17455 },
-    { layer: 7, type: "layerShift", name: "Layer Shift 7", keynum: 17456 },
-    { layer: 8, type: "layerShift", name: "Layer Shift 8", keynum: 17457 },
-    { layer: 9, type: "layerShift", name: "Layer Shift 9", keynum: 17458 },
-    { layer: 10, type: "layerShift", name: "Layer Shift 10", keynum: 17459 },
+    ...Array.from({ length: MAX_LAYERS }, (_, i) => ({
+      layer: i + 1,
+      type: "layerLock",
+      name: `Layer Lock ${i + 1}`,
+      keynum: 17492 + i,
+    })),
+    ...Array.from({ length: MAX_LAYERS }, (_, i) => ({
+      layer: i + 1,
+      type: "layerShift",
+      name: `Layer Shift ${i + 1}`,
+      keynum: 17450 + i,
+    })),
     { layer: 1, type: "layerShot", name: "One shot 1", keynum: 49161 },
     { layer: 2, type: "layerShot", name: "One shot 2", keynum: 49162 },
     { layer: 3, type: "layerShot", name: "One shot 3", keynum: 49163 },

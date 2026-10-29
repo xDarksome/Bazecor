@@ -20,6 +20,7 @@ import { Popover, PopoverContent, PopoverTrigger, PopoverButton } from "@Rendere
 import Heading from "@Renderer/components/atoms/Heading";
 import { Button } from "@Renderer/components/atoms/Button";
 import { IconLayerLock, IconLayerShift } from "@Renderer/components/atoms/icons";
+import { MAX_LAYERS } from "../../../../api/keymap/db/layerswitch";
 
 interface SelectLayersCustomDropdownProps {
   action?: any;
@@ -39,34 +40,12 @@ const SelectLayersCustomDropdown: FC<SelectLayersCustomDropdownProps> = ({
   disable = false,
 }) => {
   const layerLock = useMemo(
-    () => [
-      { name: "Layer Lock 1", keynum: 17492 },
-      { name: "Layer Lock 2", keynum: 17493 },
-      { name: "Layer Lock 3", keynum: 17494 },
-      { name: "Layer Lock 4", keynum: 17495 },
-      { name: "Layer Lock 5", keynum: 17496 },
-      { name: "Layer Lock 6", keynum: 17497 },
-      { name: "Layer Lock 7", keynum: 17498 },
-      { name: "Layer Lock 8", keynum: 17499 },
-      { name: "Layer Lock 9", keynum: 17500 },
-      { name: "Layer Lock 10", keynum: 17501 },
-    ],
+    () => Array.from({ length: MAX_LAYERS }, (_, i) => ({ name: `Layer Lock ${i + 1}`, keynum: 17492 + i })),
     [],
   );
 
   const layerSwitch = useMemo(
-    () => [
-      { name: "Layer Shift 1", keynum: 17450 },
-      { name: "Layer Shift 2", keynum: 17451 },
-      { name: "Layer Shift 3", keynum: 17452 },
-      { name: "Layer Shift 4", keynum: 17453 },
-      { name: "Layer Shift 5", keynum: 17454 },
-      { name: "Layer Shift 6", keynum: 17455 },
-      { name: "Layer Shift 7", keynum: 17456 },
-      { name: "Layer Shift 8", keynum: 17457 },
-      { name: "Layer Shift 9", keynum: 17458 },
-      { name: "Layer Shift 10", keynum: 17459 },
-    ],
+    () => Array.from({ length: MAX_LAYERS }, (_, i) => ({ name: `Layer Shift ${i + 1}`, keynum: 17450 + i })),
     [],
   );
 

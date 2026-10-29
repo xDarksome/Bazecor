@@ -9,6 +9,7 @@ import OSKey from "@Renderer/components/molecules/KeyTags/OSKey";
 import { IconInformation } from "@Renderer/components/atoms/icons";
 import CustomRadioCheckBox from "@Renderer/components/molecules/Form/CustomRadioCheckBox";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@Renderer/components/atoms/Tooltip";
+import { MAX_LAYERS } from "../../../api/keymap/db/layerswitch";
 
 interface ModPickerProps {
   keyCode: SegmentedKeyType;
@@ -85,7 +86,7 @@ function ModPicker(props: ModPickerProps) {
       //   keyCode.base + keyCode.modified <= 255) ||
       (keyCode !== undefined && keyCode.base + keyCode.modified >= 53852 && keyCode.base + keyCode.modified <= 53852 + 128) ||
       keyCode.base + keyCode.modified === 0 ||
-      (keyCode.base + keyCode.modified >= 17492 && keyCode.base + keyCode.modified <= 17501) ||
+      (keyCode.base + keyCode.modified >= 17492 && keyCode.base + keyCode.modified <= 17492 + MAX_LAYERS - 1) ||
       keyCode.base + keyCode.modified >= 8192
     ) {
       return true;
