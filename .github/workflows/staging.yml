@@ -1,14 +1,8 @@
 name: Staging
 
+# Disabled in this fork: the AppImage workflow builds the Linux package.
 on:
-  push:
-    branches:
-      - "*"
-      - "development"
-  pull_request:
-    branches:
-      - "*"
-      - "development"
+  workflow_dispatch:
 
 permissions:
   contents: read
